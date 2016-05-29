@@ -34,18 +34,22 @@ I'd also like to recommend reading [*Supercharge your Framer prototype with Fire
 | **6**   | Back in Framer, add `firebase = new Firebase` and set the required [Class Properties](https://github.com/marckrenn/framer-Firebase#1-properties)                                                                       |
 | **7**   | Save, load and sync data using the available [Class Methods](https://github.com/marckrenn/framer-Firebase#2-methods). Also, check out the [Demo Projects](https://github.com/marckrenn/framer-Firebase#demo-projects). |
 
-> **Protip 1:** You can use a single database store data for multiple Framer prototypes.
-<br />
-> **Protip 2:** Use https://firebase.google.com → *Console* → *YourProject* → *Database* to see realtimes changes made to your database. This will give you a better understanding of how Firebase methods alter your data.
-<br />
-> **Protip 3:** Framer's *Auto Refresh* can cause some unexpected behavior in combination with this module, hence why I'd suggest turning it off and to reload manually (*CMD+R*).
-<br />
-> **Protip 4:** Anti-Virus software like [Avast](https://www.avast.com) seem to interfere with the onChange()-method, as it looks a potential Cross-Site-Scripting-attack. This will hopefully be fixed by the Firebase team soon.
-<br />
+
+### Tips
+
+| Tip   |                                                                                                                                                                                                                                    |
+| :---: | :---                                                                                                                                                                                                                               |
+| **1** | You can use a single database store data for multiple Framer prototypes.                                                                                                                                                           |
+| **2** | Use https://firebase.google.com → *Console* → *YourProject* → *Database* to see realtimes changes made to your database. This will give you a better understanding of how Firebase methods alter your data.                        |
+| **3** | Framer's *Auto Refresh* can cause some unwanted behavior in combination with this module, hence why I'd suggest turning it off and to reload manually (*CMD+R*).                                                                   |
+| **4** | Anti-Virus software like [Avast](https://www.avast.com) seem to interfere with the **.onChange()**-method, as it looks like a potential Cross-Site-Scripting-attack to it. This will hopefully be fixed soon by the Firebase team. |
 
 
 ### Data
-Data on Firebase is stored as JSON, supports *Number*, *String*, *Boolean*, *Array*, *Object* and *Null* as data types and looks something like this
+Data on Firebase is stored as **JSON**, the *supported data types* are: *Number*, *String*, *Boolean*, *Array*, *Object* and *Null*.
+For more information on *JSON data types*, please refer to the [JSON article on Wikipedia.org](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example).
+
+The database for the provided [Demo Projects](https://github.com/marckrenn/framer-Firebase#demo-projects) looks something like this:
 ![database](http://i.imgur.com/7e40dX5.png)
 
 
@@ -61,32 +65,30 @@ you can reach me via [Twitter](https://twitter.com/marc_krenn), [Facebook (SOON)
 ## Firebase Class Reference
 This module is based on [Firebase's REST API](https://firebase.google.com/docs/reference/rest/database/).
 
-| Table of contents                                                                                                                                         |
-| :---                                                                                                                                                      |
-| [**1) Properties**](https://github.com/marckrenn/framer-Firebase#1-properties)                                                                            |
-| \|--- [firebase**.projectID, firebase**.secret**, firebase**.server**](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters) |
-| \|--- [firebase**.debug**](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)                                             |
-| \|--- [firebase**.status**](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)                                            |
-| [**2) Methods**](https://github.com/marckrenn/framer-Firebase#2-methods)                                                                                  |
-| \|--- [firebase**.get**()](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)                                             |
-| \|--- [firebase**.put**()](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)                                        |
-| \|--- [firebase**.post**()](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)                                      |
-| \|--- [firebase**.patch**()](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)                                    |
-| \|--- [firebase**.delete**()](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)                                      |
-| \|--- [firebase**.onChange**()](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-callback)                                              |
-| [**3) Parameters**](https://github.com/marckrenn/framer-Firebase#3-parameters)                                                                            |
-| \|--- [*OrderBy*- and *Limit*-parameters](https://github.com/marckrenn/framer-Firebase#-orderby--and-limit--paramters)                                    |
+| Table of contents                                                                                                                                       |
+| :---                                                                                                                                                    |
+| [**1) Properties**](https://github.com/marckrenn/framer-Firebase#1-properties)                                                                          |
+| \|--- [firebase**.projectID**, **.secret**, **.server**](https://github.com/marckrenn/framer-Firebase#-firebaseprojectid-firebasesecret-firebaseserver) |
+| \|--- [firebase**.debug**](https://github.com/marckrenn/framer-Firebase#-firebasedebug)                                                                 |
+| \|--- [firebase**.status**](https://github.com/marckrenn/framer-Firebase#-firebasestatus-read-only)                                                     |
+| [**2) Methods**](https://github.com/marckrenn/framer-Firebase#2-methods)                                                                                |
+| \|--- [firebase**.get**()](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)                                           |
+| \|--- [firebase**.put**()](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)                                      |
+| \|--- [firebase**.post**()](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)                                    |
+| \|--- [firebase**.patch**()](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)                                  |
+| \|--- [firebase**.delete**()](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)                                    |
+| \|--- [firebase**.onChange**()](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-callback)                                            |
+| [**3) Parameters**](https://github.com/marckrenn/framer-Firebase#3-parameters)                                                                          |
+| \|--- [**OrderBy**- and **Limit**-parameters](https://github.com/marckrenn/framer-Firebase#-orderby--and-limit--paramters)                              |
 
 <br />
 <br />
 
 ### 1) Properties
 
-<br />
-
 #### • firebase.projectID, firebase.secret, firebase.server
 ---
-**projectID**, **secret** and **server** are required for the module to function properly.
+The properties **projectID**, **secret** and **server** are required for the module to function properly.
 
 The required information is located at https://firebase.google.com → *Console* → *YourProject* → ...
 
@@ -108,13 +110,13 @@ firebase = new Firebase
 
 #### • firebase.debug
 ---
-If set to **true**, it will log relevant connection messages to the console.
+If set to **true**, relevant connection messages will be logged to the console.
 
 <br />
 
 #### • firebase.status (*read only*)
 ---
-Returns the current connection status, either **"connected"** or **"disconnected"**.
+Returns the current connection status, either *"connected"* or *"disconnected"*.
 
 <br />
 
@@ -177,10 +179,10 @@ Writes data to the database.
 
 If the *path* **does not** exist, it will be created, if it **does** exist, the specified node will be updated with the new data.
 
-The following data types are supported: *Number*, *String*, *Boolean*, *Array*, *Object* and *Null*.
-Please refer to the [JSON article on Wikipedia.org](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example) for more information on this topic.
+The following data types are supported: *Number*, *String*, *Boolean*, *Array*, *Object* and *Null*. <br />
+For more information on *JSON data types*, please refer to the [JSON article on Wikipedia.org](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example).
 
-**Caution:** To update data without deleting omitted *children*- or *sibling*-nodes, use [firebase.patch()](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters).
+**Tip:** To update data without deleting omitted *children*- or *sibling*-nodes, use [firebase.patch()](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters) instead.
 
 **Examples:**
 ```coffee
@@ -200,13 +202,13 @@ firebase.put("/values", {"foo": true, "bar": false}, response)
 
 #### • firebase.post(path, data, *callback*, *parameters*)
 ---
-Adds data to the specified *path* using a random key (eg. `"/addressBook/**-KIU9s3bWOpODk9cai_n**/"`).
+Adds data to the specified *path* using a random key (eg. `"/addressBook/-KIU9s3bWOpODk9cai_n/"`).
 
 This is useful when adding new data to a node (eg. adding a new entry to an address book).
 The random key also prevents possible data interference between multiple, concurrent users.
 
-The following data types are supported: *Number*, *String*, *Boolean*, *Array*, *Object* and *Null*.
-Please refer to the [JSON article on Wikipedia.org](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example) for more information on this topic.
+The following data types are supported: *Number*, *String*, *Boolean*, *Array*, *Object* and *Null*. <br />
+For more information on *JSON data types*, please refer to the [JSON article on Wikipedia.org](https://en.wikipedia.org/wiki/JSON#Data_types.2C_syntax_and_example).
 
 **Examples:**
 ```coffee
@@ -263,8 +265,8 @@ firebase.delete("/values")
 #### • firebase.onChange(path or "connection", callback)
 ---
 
-**Monitoring a database path:**
-Fires when the Framer project is loaded (returns all the current data saved at that path) and whenever the value was changed (only returns the newly added data), across multiple devices or browser windows. If it returns *null*, the node has been deleted.
+**Monitoring a database path:** <br />
+Fires, when the Framer project is loaded (returns all current data of the path) and whenever some of its data was changed (returns only the newly added or changed data), across multiple devices or browser windows. If it returns *null*, the node has been deleted.
 
 **Example:**
 ```coffee
@@ -274,7 +276,6 @@ firebase.onChange "/values", (value) ->
 	print value
 
 # Advanced
-
 response = (data, method) ->
 	# method returns either `put´ or `patch´, depending on what method changed the data
 	print "received #{data} via #{method}"
@@ -285,8 +286,9 @@ firebase.onChange("/values", response)
 <br />
 
 
-**Monitoring the connection status:**
-Fires whenever the connection status to Firebase has changed, by setting the first argument to *"connection"*.
+**Monitoring the connection status:** <br />
+First argument must be set to *"connection"*. <br />
+Fires, whenever the connection status to Firebase has changed.
 
 **Example:**
 ```coffee
