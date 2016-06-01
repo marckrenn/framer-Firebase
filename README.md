@@ -26,7 +26,7 @@ These examples include access to a public demo database for the purpose of demon
 
 ## Getting started in under 5 minutes
 
-I'd also like to recommend reading [*Supercharge your Framer prototype with Firebase, pt.1* (NOT UP YET)](link) on Medium, if you haven't already.
+I'd also like to recommend reading [*Supercharge your Framer prototype with Firebase, pt.1*](https://medium.com/@marc_krenn/framerfirebase1-e7d13a939cf4) on Medium, if you haven't already.
 
 | Step    | Instruction                                                                                                                                                                                                            |
 | :---:   | :---                                                                                                                                                                                                                   |
@@ -48,6 +48,7 @@ I'd also like to recommend reading [*Supercharge your Framer prototype with Fire
 | **2** | Use https://firebase.google.com → *Console* → *YourProject* → *Database* to see realtimes changes made to your database. This will give you a better understanding of how Firebase methods alter your data.                        |
 | **3** | Framer's *Auto Refresh* can cause some unwanted behavior in combination with this module, hence why I'd suggest turning it off and to reload manually (*CMD+R*).                                                                   |
 | **4** | Anti-Virus software like [Avast](https://www.avast.com) seem to interfere with the **.onChange()**-method, as it looks like a potential Cross-Site-Scripting-attack. [This will hopefully be fixed soon by the Firebase team.](http://i.imgur.com/DeX4Pok.png) |
+| **5** | Try to limit **put**- / **post**- / **patch**- serverrequests to a reasnobable refresh rate (either by syncing at the end of interaction or by using [Utils.debounce](https://github.com/koenbok/Framer/blob/master/framer/Utils.coffee#L100)). Data flooding can cause severe lags. |
 
 
 ### Data
@@ -60,7 +61,7 @@ The database used for the provided [Demo Projects](https://github.com/marckrenn/
 
 ### Contact & Help
 If you need further assistance or want to leave me some feedback, <br />
-you can reach me via [Twitter](https://twitter.com/marc_krenn), [Facebook (SOON)](discussion) or [Slack](https://framer-slack-signup.herokuapp.com/).
+you can reach me via [Twitter](https://twitter.com/marc_krenn), [Facebook (SOON)](https://www.facebook.com/groups/framerjs/permalink/866877606772645/) or [Slack](https://framer-slack-signup.herokuapp.com/).
 
 <br />
 ---
@@ -82,7 +83,7 @@ This module is based on [Firebase's REST API](https://firebase.google.com/docs/r
 | \|--- [firebase**.post**()](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)                                    |
 | \|--- [firebase**.patch**()](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)                                  |
 | \|--- [firebase**.delete**()](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)                                    |
-| \|--- [firebase**.onChange**()](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-callback)                                            |
+| \|--- [firebase**.onChange**()](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-or-connection-callback)                              |
 | [**3) Parameters**](https://github.com/marckrenn/framer-Firebase#3-parameters)                                                                          |
 | \|--- [**OrderBy**- and **Limit**-parameters](https://github.com/marckrenn/framer-Firebase#-orderby--and-limit--paramters)                              |
 
@@ -130,14 +131,14 @@ Returns the current connection status, either *"connected"* or *"disconnected"*.
 ---
 **Overview**
 
-| Method                                                                                                         | Arguments                              | Use case                       |
-| ---:                                                                                                           | :---                                   | :---                           |
-| [firebase**.get**](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)          | (path, callback, *parameters*)         | Retreives data                 |
-| [firebase**.put**](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)     | (path, data, *callback*, *parameters*) | Writes / updates data          |
-| [firebase**.post**](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)   | (path, data, *callback*, *parameters*) | Writes data using a random key |
-| [firebase**.patch**](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters) | (path, data, *callback*, *parameters*) | Updates data                   |
-| [firebase**.delete**](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)   | (path, *callback*,  *parameters*)      | Deletes data                   |
-| [firebase**.onChange**](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-callback)           | (path, callback)                       | Monitors / syncs data          |
+| Method                                                                                                             | Arguments                              | Use case                       |
+| ---:                                                                                                               | :---                                   | :---                           |
+| [firebase**.get**](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)              | (path, callback, *parameters*)         | Retreives data                 |
+| [firebase**.put**](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)         | (path, data, *callback*, *parameters*) | Writes / updates data          |
+| [firebase**.post**](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)       | (path, data, *callback*, *parameters*) | Writes data using a random key |
+| [firebase**.patch**](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)     | (path, data, *callback*, *parameters*) | Updates data                   |
+| [firebase**.delete**](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)       | (path, *callback*,  *parameters*)      | Deletes data                   |
+| [firebase**.onChange**](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-or-connection-callback) | (path or "connection", callback)       | Monitors / syncs data          |
 
 > **Protip:** As a beginner, you can ignore separated *callback*-functions and *parameters*.
 
