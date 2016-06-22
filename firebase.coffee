@@ -143,10 +143,17 @@ class exports.Firebase extends Framer.BaseClass
 			console.log "Firebase: Listening to changes made to '#{path}' \n URL: '#{url}'" if @debug
 
 			source.addEventListener "put", (ev) =>
+<<<<<<< HEAD
 				callback(JSON.parse(ev.data).data, "put", JSON.parse(ev.data).path, _.tail(JSON.parse(ev.data).path.split("/"),1)) if callback?
 				console.log "Firebase: Received changes made to '#{path}' via 'PUT': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
 
 			source.addEventListener "patch", (ev) =>
 				callback(JSON.parse(ev.data).data, "patch", JSON.parse(ev.data).path, _.tail(JSON.parse(ev.data).path.split("/"),1)) if callback?
-				console.log "Firebase: Received changes made to '#{path}' via 'PATCH': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
+=======
+				callback(JSON.parse(ev.data).data, "put", JSON.parse(ev.data).path, JSON.parse(ev.data).path.split("/")) if callback?
+				console.log "Firebase: Received changes made to '#{path}' via 'PUT': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
 
+			source.addEventListener "patch", (ev) =>
+				callback(JSON.parse(ev.data).data, "patch", JSON.parse(ev.data).path, JSON.parse(ev.data).path.split("/")) if callback?
+>>>>>>> origin/master
+				console.log "Firebase: Received changes made to '#{path}' via 'PATCH': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
