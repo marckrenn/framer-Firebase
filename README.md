@@ -167,12 +167,12 @@ firebase.get "/value", (value) ->
 # Simple 2, expecting dataset
 firebase.get "/names", (names) ->
 	namesArray = _.toArray(names) # converts JSON to array
-	print name for name in names
+	print name for name in namesArray
 
 # Advanced
 response = (names) ->
 	namesArray = _.toArray(names)
-	print name for name in names
+	print name for name in namesArray
 
 firebase.get("/names",response,{orderBy: "$key", limitToFirst: 5})
 
