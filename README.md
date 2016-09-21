@@ -11,7 +11,7 @@ The **Firebase module** allows your Framer prototype to **load**, **save** and *
 | :---:                                                            | :---:                                                             |
 | ![gif](http://i.giphy.com/l0K40AVo2PF0usMuY.gif)                 | ![gif](http://i.giphy.com/3o7qE5fsbV3QqzyOZi.gif)                 |
 | Loads, saves and syncs *slider.value* w/ 2 lines of code         | World's first(?) bubble popping MMO                               |
-| Live @ [firebaseSlider](http://share.framerjs.com/3quipitnnf81/) | Live @ [firebaseBubbles](http://share.framerjs.com/6kii3hqb7tt2/) |
+| Live @ [firebaseSlider](http://share.framerjs.com/3quipitnnf81/) | Live @ [firebaseBubbles](http://share.framerjs.com/upq61yz5hhlx/) |
 
 | Placeholder                                                      | Advanced                                                          |
 | :---:                                                            | :---:                                                             |
