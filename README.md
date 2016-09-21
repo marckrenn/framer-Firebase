@@ -74,7 +74,7 @@ This module is based on [Firebase's REST API](https://firebase.google.com/docs/r
 | Table of contents                                                                                                                                       |
 | :---                                                                                                                                                    |
 | [**1) Properties**](https://github.com/marckrenn/framer-Firebase#1-properties)                                                                          |
-| \|--- [firebase**.projectID**, **.secret**, **.server**](https://github.com/marckrenn/framer-Firebase#-firebaseprojectid-firebasesecret-firebaseserver) |
+| \|--- [firebase**.projectID**, **.secret**](https://github.com/marckrenn/framer-Firebase#-firebaseprojectid-firebasesecret)                             |
 | \|--- [firebase**.debug**](https://github.com/marckrenn/framer-Firebase#-firebasedebug)                                                                 |
 | \|--- [firebase**.status**](https://github.com/marckrenn/framer-Firebase#-firebasestatus-read-only)                                                     |
 | [**2) Methods**](https://github.com/marckrenn/framer-Firebase#2-methods)                                                                                |
@@ -92,7 +92,7 @@ This module is based on [Firebase's REST API](https://firebase.google.com/docs/r
 
 ### 1) Properties
 
-#### • firebase.projectID, firebase.secret, firebase.server
+#### • firebase.projectID, firebase.secret
 ---
 The properties **projectID**, **secret** and **server** are required for the module to function properly.
 
@@ -102,13 +102,12 @@ The required information is located at https://firebase.google.com → *Console*
 firebase = new Firebase
 	projectID: ___________ # 1) ... Database → first part of URL
 	secret: ______________ # 2) ... Project Settings → Database → Database Secrets
-	server: ______________ # 3) Get this info by setting `server: undefined´ first
 ```
   
 
-| 1) projectID                                                 | 2) secret                                                     | 3) server                                                     |
-| :---:                                                        | :---:                                                         | :---:                                                         |
-| ![gif for ants I](http://i.giphy.com/xT4uQFz8q6HAHKkfi8.gif) | ![gif for ants II](http://i.giphy.com/l3E6oeWMBJMc9Sk7u.gif)  | ![gif for ants III](http://i.giphy.com/l3E6EnKJt8bySmMkU.gif) |
+| 1) projectID                                                 | 2) secret                                                     |
+| :---:                                                        | :---:                                                         |
+| ![gif for ants I](http://i.giphy.com/xT4uQFz8q6HAHKkfi8.gif) | ![gif for ants II](http://i.giphy.com/l3E6oeWMBJMc9Sk7u.gif)  |
 
 > **Protip:** Contrary to what I did in the gif, I advise you **NOT** to share your Firebase *secret* publicly, as it allow others to alter the data stored in your database. If you do so by accident, you can always revoke access by deleting the shared *secret* and creating a new one at https://firebase.google.com → *Console* → *Project Settings* → *Database* → *Database Secrets*.
 

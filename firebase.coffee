@@ -1,8 +1,8 @@
 
 
 
-# 'Firebase REST API Class' module v1.0
-# by Marc Krenn, June 22nd, 2016 | marc.krenn@gmail.com | @marc_krenn
+# 'Firebase REST API Class' module v1.1
+# by Marc Krenn, September 21st, 2016 | marc.krenn@gmail.com | @marc_krenn
 
 # Documentation of this Module: https://github.com/marckrenn/framer-Firebase
 # ------ : ------- Firebase REST API: https://firebase.google.com/docs/reference/rest/database/
@@ -18,35 +18,18 @@
 class exports.Firebase extends Framer.BaseClass
 
 
-
-	getCORSurl = (server, path, secret, project) ->
-
-		switch Utils.isWebKit()
-			when true then url = "https://#{server}#{path}.json?auth=#{secret}&ns=#{project}&sse=true" # Webkit XSS workaround
-			else           url = "https://#{project}.firebaseio.com#{path}.json?auth=#{secret}"
-
-		return url
-
-
 	@.define "status",
 		get: -> @_status # readOnly
 
 	constructor: (@options={}) ->
 		@projectID = @options.projectID ?= null
 		@secret    = @options.secret    ?= null
-		@server    = @options.server    ?= undefined # required for WebKit XSS workaround
 		@debug     = @options.debug     ?= false
 		@_status                        ?= "disconnected"
 		super
 
 
-		if @server is undefined
-			Utils.domLoadJSON "https://#{@projectID}.firebaseio.com/.settings/owner.json", (a,server) ->
-				print msg = "Add ______ server:" + '   "' + server + '"' + " _____ to your instance of Firebase."
-				console.log "Firebase: #{msg}" if @debug
-
-
-		console.log "Firebase: Connecting to Firebase Project '#{@projectID}' ... \n URL: '#{getCORSurl(@server, "/", @secret, @projectID)}'" if @debug
+		console.log "Firebase: Connecting to Firebase Project '#{@projectID}' ... \n URL: 'https://#{@projectID}.firebaseio.com'" if @debug
 		@.onChange "connection"
 
 
@@ -117,7 +100,7 @@ class exports.Firebase extends Framer.BaseClass
 
 		if path is "connection"
 
-			url = getCORSurl(@server, "/", @secret, @projectID)
+			url = "https://#{@projectID}.firebaseio.com/.json?auth=#{@secret}"
 			currentStatus = "disconnected"
 			source = new EventSource(url)
 
@@ -138,7 +121,7 @@ class exports.Firebase extends Framer.BaseClass
 
 		else
 
-			url = getCORSurl(@server, path, @secret, @projectID)
+			url = "https://#{@projectID}.firebaseio.com#{path}.json?auth=#{@secret}"
 			source = new EventSource(url)
 			console.log "Firebase: Listening to changes made to '#{path}' \n URL: '#{url}'" if @debug
 
