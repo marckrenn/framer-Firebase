@@ -358,6 +358,7 @@ For further information on how to order or limit requests please refer to [Fireb
 | Parameter     | Type       |
 | ---:          | :---       |
 | limitToFirst: | *Number*   |
+| limitToLast:  | *Number*   |
 | startAt:      | *Number*   |
 | endAt:        | *Number*   |
 | equalTo:      | *Number*   |
