@@ -42,10 +42,10 @@ I'd also like to recommend reading [*Supercharge your Framer prototype with Fire
 
 ### Tips
 
-| Tip   |                                                                                                                                                                                                                                    |
-| :---: | :---                                                                                                                                                                                                                               |
-| **1** | You can use a single database store data for multiple Framer prototypes.                                                                                                                                                           |
-| **2** | Use https://firebase.google.com → *Console* → *YourProject* → *Database* to see realtimes changes made to your database. This will give you a better understanding of how Firebase methods alter your data.                        |
+| Tip   |                                                                                                                                                                                                                                     |
+| :---: | :---                                                                                                                                                                                                                                 |
+| **1** | You can use a single database to store data for multiple Framer prototypes.                                                                                                                                                         |
+| **2** | Use https://firebase.google.com → *Console* → *YourProject* → *Database* to see realtimes changes made to your database. This will give you a better understanding of how Firebase methods alter your data.                       |
 | **3** | Framer's *Auto Refresh* can cause some unwanted behavior in combination with this module, hence why I'd suggest turning it off and to reload manually (*CMD+R*).                                                                   |
 | **4** | Anti-Virus software like [Avast](https://www.avast.com) seem to interfere with the **.onChange()**-method, as it looks like a potential Cross-Site-Scripting-attack. [This will hopefully be fixed soon by the Firebase team.](http://i.imgur.com/DeX4Pok.png) |
 | **5** | Try to limit **put**- / **post**- / **patch**- serverrequests to a reasnobable refresh rate (either by syncing at the end of interaction or by using [Utils.debounce](https://github.com/koenbok/Framer/blob/master/framer/Utils.coffee#L100)). Data flooding can cause severe lags. |
