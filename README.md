@@ -17,7 +17,7 @@ The **Firebase module** allows your Framer prototype to **load**, **save** and *
 | :---:                                                            | :---:                                                             |
 | ![png](http://i.imgur.com/DJt6U3a.png)                           | ![gif](http://i.giphy.com/l0K4lktvDV129Jl8k.gif)                  |
 |                                                                  | *Like*-counts, three of them                                      |
-|                                                                  | Live @ [firebaseLikes](http://share.framerjs.com/6q3dxwenh8gu/)   |
+|                                                                  | Live @ [firebaseLikes](http://share.framerjs.com/f3hdaku9zomz/)   |
 
 These examples include access to a public demo database for the purpose of demonstration.
 > **Please DON'T use this demo database for your projects! Your data will be deleted.**
