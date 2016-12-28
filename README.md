@@ -11,13 +11,13 @@ The **Firebase module** allows your Framer prototype to **load**, **save** and *
 | :---:                                                            | :---:                                                             |
 | ![gif](http://i.giphy.com/l0K40AVo2PF0usMuY.gif)                 | ![gif](http://i.giphy.com/3o7qE5fsbV3QqzyOZi.gif)                 |
 | Loads, saves and syncs *slider.value* w/ 2 lines of code         | World's first(?) bubble popping MMO                               |
-| Live @ [firebaseSlider](http://share.framerjs.com/3quipitnnf81/) | Live @ [firebaseBubbles](http://share.framerjs.com/upq61yz5hhlx/) |
+| Live @ [firebaseSlider](https://framer.cloud/ljPWN/)             | Live @ [firebaseBubbles](https://framer.cloud/Pfkqn)              |
 
 | Placeholder                                                      | Advanced                                                          |
 | :---:                                                            | :---:                                                             |
 | ![png](http://i.imgur.com/DJt6U3a.png)                           | ![gif](http://i.giphy.com/l0K4lktvDV129Jl8k.gif)                  |
 |                                                                  | *Like*-counts, three of them                                      |
-|                                                                  | Live @ [firebaseLikes](http://share.framerjs.com/f3hdaku9zomz/)   |
+|                                                                  | Live @ [firebaseLikes](https://framer.cloud/vrEdo)                |
 
 These examples include access to a public demo database for the purpose of demonstration.
 > **Please DON'T use this demo database for your projects! Your data will be deleted.**
@@ -61,7 +61,7 @@ The database used for the provided [Demo Projects](https://github.com/marckrenn/
 
 ### Contact & Help
 If you need further assistance or want to leave me some feedback, <br />
-you can reach me via [Twitter](https://twitter.com/marc_krenn), [Facebook (SOON)](https://www.facebook.com/groups/framerjs/permalink/866877606772645/) or [Slack](https://framer-slack-signup.herokuapp.com/).
+you can reach me via [Twitter](https://twitter.com/marc_krenn), [Facebook](https://www.facebook.com/groups/framerjs/permalink/866877606772645/) or [Slack](https://framer-slack-signup.herokuapp.com/).
 
 <br />
 ---
@@ -95,7 +95,9 @@ This module is based on [Firebase's REST API](https://firebase.google.com/docs/r
 
 #### • firebase.projectID, firebase.secret
 ---
-The properties **projectID**, **secret** and **server** are required for the module to function properly.
+The property **projectID** is required for the module to work.
+
+**secret** is now an optional property and it can be either set (see below) or it can be substitued by [changing your database access rules](https://github.com/marckrenn/framer-Firebase#-firebasesecret).
 
 The required information is located at https://firebase.google.com → *Console* → *YourProject* → ...
 
@@ -110,17 +112,20 @@ firebase = new Firebase
 | :---:                                                        | :---:                                                         |
 | ![gif for ants I](http://i.giphy.com/xT4uQFz8q6HAHKkfi8.gif) | ![gif for ants II](http://i.giphy.com/3o6ZtnLC6wkxSZLY0U.gif) |
 
-> **Protip:** Contrary to what I did in the gif, I advise you **NOT** to share your Firebase *secret* publicly, as it allow others to alter the data stored in your database. If you do so by accident, you can always revoke access by deleting the shared *secret* and creating a new one at https://firebase.google.com → *Console* → *Project Settings* → *Database* → *Database Secrets*.
+> **Protip:** Contrary to what I did in the gif, I advise you **NOT** to share your Firebase *secret* publicly, as it allow others to alter the data stored in your database. If you do so by accident, you can always revoke access by deleting the shared *secret* and creating a new one at https://firebase.google.com → *Console* → Project Settings → Service Accounts → Database Secrets.
 
 <br />
 
 #### • firebase.secret
 ---
-If you wish not to share your *secret*, please follow the next steps.
+**Optional**:
+If you wish not to use and share your database *secret* in your Framer project like [shown above](https://github.com/marckrenn/framer-Firebase#-firebaseprojectid-firebasesecret), you can do the following instead:
 
-1. Simply, do not use *secret* on your code. (remove it if you have already)
-2. Go to *Console* → *YourProject* → *Database* → *RULES*
-3. Change the rules of `.read` and `.write` to `true` like the following:
+| Steps |                                                                                                                                                                                                                                            |
+| :---: | :---                                                                                                                                                                                                                                        |
+| **1** | Go to *Console* → *YourProject* → *Database* → *RULES*                                           |
+| **2** | Change the rules of `.read` and `.write` to `true` like this:                                    |
+
 ```json
 {
   "rules": {
@@ -129,6 +134,12 @@ If you wish not to share your *secret*, please follow the next steps.
   }
 }
 ```
+
+| Step |                                                                                                                                                                                                                                             |
+| :---: | :---                                                                                                                                                                                                                                       |
+| **3** | If you've already set the *secret*-property before, you can remove it as it's no longer needed. |
+
+> **Caution:** Similar to sharing your database secret key publicly, this will grant everyone on the web with write-access, which will allow everyone to read and modify data saved in your database! Please only share your projects (and Firebase projectIDs) with people you trust.  
 
 <br />
 
