@@ -75,7 +75,8 @@ This module is based on [Firebase's REST API](https://firebase.google.com/docs/r
 | :---                                                                                                                                                    |
 | [**1) Properties**](https://github.com/marckrenn/framer-Firebase#1-properties)                                                                          |
 | \|--- [firebase**.projectID**, **.secret**](https://github.com/marckrenn/framer-Firebase#-firebaseprojectid-firebasesecret)                             |
-| \|--- [firebase**.debug**](https://github.com/marckrenn/framer-Firebase#-firebasedebug)                                                                 |
+| \|--- [firebase**.secret**](https://github.com/marckrenn/framer-Firebase#-firebasesecret)                                   |
+| \|--- [firebase**.debug**](https://github.com/marckrenn/framer-Firebase#-firebasedebug)                                                                |
 | \|--- [firebase**.status**](https://github.com/marckrenn/framer-Firebase#-firebasestatus-read-only)                                                     |
 | [**2) Methods**](https://github.com/marckrenn/framer-Firebase#2-methods)                                                                                |
 | \|--- [firebase**.get**()](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)                                           |
@@ -110,6 +111,24 @@ firebase = new Firebase
 | ![gif for ants I](http://i.giphy.com/xT4uQFz8q6HAHKkfi8.gif) | ![gif for ants II](http://i.giphy.com/3o6ZtnLC6wkxSZLY0U.gif) |
 
 > **Protip:** Contrary to what I did in the gif, I advise you **NOT** to share your Firebase *secret* publicly, as it allow others to alter the data stored in your database. If you do so by accident, you can always revoke access by deleting the shared *secret* and creating a new one at https://firebase.google.com → *Console* → *Project Settings* → *Database* → *Database Secrets*.
+
+<br />
+
+#### • firebase.secret
+---
+If you wish not to share your *secret*, please follow the next steps.
+
+1. Simply, do not use *secret* on your code. (remove it if you have already)
+2. Go to *Console* → *YourProject* → *Database* → *RULES*
+3. Change the rules of `.read` and `.write` to `true` like the following:
+```json
+{
+  "rules": {
+    ".read": "true",
+    ".write": "true"
+  }
+}
+```
 
 <br />
 
