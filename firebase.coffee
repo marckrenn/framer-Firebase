@@ -26,8 +26,9 @@ class exports.Firebase extends Framer.BaseClass
 		@secret    = @options.secret    ?= null
 		@debug     = @options.debug     ?= false
 		@_status                        ?= "disconnected"
-		super
 
+		@secretEndPoint = if @secret then "?auth=#{@secret}" else ""
+		super
 
 		console.log "Firebase: Connecting to Firebase Project '#{@projectID}' ... \n URL: 'https://#{@projectID}.firebaseio.com'" if @debug
 		@.onChange "connection"
@@ -35,7 +36,7 @@ class exports.Firebase extends Framer.BaseClass
 
 	request = (project, secret, path, callback, method, data, parameters, debug) ->
 
-		url = "https://#{project}.firebaseio.com#{path}.json?auth=#{secret}"
+		url = "https://#{project}.firebaseio.com#{path}.json#{secret}"
 
 
 		unless parameters is undefined
@@ -87,11 +88,11 @@ class exports.Firebase extends Framer.BaseClass
 
 	# Available methods
 
-	get:    (path, callback,       parameters) -> request(@projectID, @secret, path, callback, "GET",    null, parameters, @debug)
-	put:    (path, data, callback, parameters) -> request(@projectID, @secret, path, callback, "PUT",    data, parameters, @debug)
-	post:   (path, data, callback, parameters) -> request(@projectID, @secret, path, callback, "POST",   data, parameters, @debug)
-	patch:  (path, data, callback, parameters) -> request(@projectID, @secret, path, callback, "PATCH",  data, parameters, @debug)
-	delete: (path, callback,       parameters) -> request(@projectID, @secret, path, callback, "DELETE", null, parameters, @debug)
+	get:    (path, callback,       parameters) -> request(@projectID, @secretEndPoint, path, callback, "GET",    null, parameters, @debug)
+	put:    (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "PUT",    data, parameters, @debug)
+	post:   (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "POST",   data, parameters, @debug)
+	patch:  (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "PATCH",  data, parameters, @debug)
+	delete: (path, callback,       parameters) -> request(@projectID, @secretEndPoint, path, callback, "DELETE", null, parameters, @debug)
 
 
 
@@ -100,7 +101,7 @@ class exports.Firebase extends Framer.BaseClass
 
 		if path is "connection"
 
-			url = "https://#{@projectID}.firebaseio.com/.json?auth=#{@secret}"
+			url = "https://#{@projectID}.firebaseio.com/.json#{@secretEndPoint}"
 			currentStatus = "disconnected"
 			source = new EventSource(url)
 
@@ -121,7 +122,7 @@ class exports.Firebase extends Framer.BaseClass
 
 		else
 
-			url = "https://#{@projectID}.firebaseio.com#{path}.json?auth=#{@secret}"
+			url = "https://#{@projectID}.firebaseio.com#{path}.json#{@secretEndPoint}"
 			source = new EventSource(url)
 			console.log "Firebase: Listening to changes made to '#{path}' \n URL: '#{url}'" if @debug
 
