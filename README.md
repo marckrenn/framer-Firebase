@@ -115,6 +115,7 @@ firebase = new Firebase
 <br />
 
 #### • firebase.secret
+---
 If you wish not to share your *secret*, please follow the next steps.
 
 1. Simply, do not use *secret* on your code. (remove it if you have already)
