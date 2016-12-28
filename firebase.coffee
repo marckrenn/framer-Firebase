@@ -1,17 +1,7 @@
 
 
-
-# 'Firebase REST API Class' module v1.1
-# by Marc Krenn, September 21st, 2016 | marc.krenn@gmail.com | @marc_krenn
-
 # Documentation of this Module: https://github.com/marckrenn/framer-Firebase
 # ------ : ------- Firebase REST API: https://firebase.google.com/docs/reference/rest/database/
-
-
-# ToDo:
-# Fix onChange "connection", `this´ context
-
-
 
 # Firebase REST API Class ----------------------------
 
