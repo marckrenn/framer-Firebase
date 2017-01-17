@@ -17,7 +17,7 @@ class exports.Firebase extends Framer.BaseClass
 		@debug     = @options.debug     ?= false
 		@_status                        ?= "disconnected"
 
-		@secretEndPoint = if @secret then "?auth=#{@secret}" else ""
+		@secretEndPoint = if @secret then "auth=#{@secret}" else ""
 		super
 
 		console.log "Firebase: Connecting to Firebase Project '#{@projectID}' ... \n URL: 'https://#{@projectID}.firebaseio.com'" if @debug
@@ -26,7 +26,7 @@ class exports.Firebase extends Framer.BaseClass
 
 	request = (project, secret, path, callback, method, data, parameters, debug) ->
 
-		url = "https://#{project}.firebaseio.com#{path}.json#{secret}"
+		url = "https://#{project}.firebaseio.com#{path}.json?#{secret}"
 
 
 		unless parameters is undefined
