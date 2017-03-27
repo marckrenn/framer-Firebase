@@ -61,7 +61,7 @@ The database used for the provided [Demo Projects](https://github.com/marckrenn/
 
 ### Contact & Help
 If you need further assistance or want to leave me some feedback, <br />
-you can reach me via [Twitter](https://twitter.com/marc_krenn), [Facebook](https://www.facebook.com/groups/framerjs/permalink/866877606772645/) or [Slack](https://framer-slack-signup.herokuapp.com/).
+you can reach me via [Twitter](https://twitter.com/marc_krenn), [Facebook](https://www.facebook.com/groups/framerjs/permalink/1111435055650231/) or [Slack](https://framer-slack-signup.herokuapp.com/).
 
 <br />
 ---
