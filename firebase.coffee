@@ -17,7 +17,7 @@ class exports.Firebase extends Framer.BaseClass
 		@debug     = @options.debug     ?= false
 		@_status                        ?= "disconnected"
 
-		@secretEndPoint = if @secret then "?auth=#{@secret}" else ""
+		@secretEndPoint = if @secret then "?auth=#{@secret}" else "?" # hotfix
 		super
 
 		console.log "Firebase: Connecting to Firebase Project '#{@projectID}' ... \n URL: 'https://#{@projectID}.firebaseio.com'" if @debug
@@ -41,14 +41,12 @@ class exports.Firebase extends Framer.BaseClass
 				url += "&download=#{parameters.download}"
 				window.open(url,"_self")
 
-
 			url += "&orderBy=" + '"' + parameters.orderBy + '"' if typeof parameters.orderBy      is "string"
-			url += "&limitToFirst=#{parameters.limitToFirst}"   if typeof parameters.limitToFirst is "number"
+			print url += "&limitToFirst=#{parameters.limitToFirst}"   if typeof parameters.limitToFirst is "number"
 			url += "&limitToLast=#{parameters.limitToLast}"     if typeof parameters.limitToLast  is "number"
 			url += "&startAt=#{parameters.startAt}"             if typeof parameters.startAt      is "number"
 			url += "&endAt=#{parameters.endAt}"                 if typeof parameters.endAt        is "number"
 			url += "&equalTo=#{parameters.equalTo}"             if typeof parameters.equalTo      is "number"
-
 
 		xhttp = new XMLHttpRequest
 		console.log "Firebase: New '#{method}'-request with data: '#{JSON.stringify(data)}' \n URL: '#{url}'" if debug
