@@ -74,17 +74,17 @@ This module is based on [Firebase's REST API](https://firebase.google.com/docs/r
 | Table of contents                                                                                                                                       |
 | :---                                                                                                                                                    |
 | [**1) Properties**](https://github.com/marckrenn/framer-Firebase#1-properties)                                                                          |
-| \|--- [firebase**.projectID**, **.secret**](https://github.com/marckrenn/framer-Firebase#-firebaseprojectid-firebasesecret)                             |
-| \|--- [firebase**.secret**](https://github.com/marckrenn/framer-Firebase#-firebasesecret)                                   |
-| \|--- [firebase**.debug**](https://github.com/marckrenn/framer-Firebase#-firebasedebug)                                                                |
-| \|--- [firebase**.status**](https://github.com/marckrenn/framer-Firebase#-firebasestatus-read-only)                                                     |
+| \|--- [firebase.projectID, .secret](https://github.com/marckrenn/framer-Firebase#-firebaseprojectid-firebasesecret)                             |
+| \|--- [firebase.secret](https://github.com/marckrenn/framer-Firebase#-firebasesecret)                                   |
+| \|--- [firebase.debug](https://github.com/marckrenn/framer-Firebase#-firebasedebug)                                                                |
+| \|--- [firebase.status](https://github.com/marckrenn/framer-Firebase#-firebasestatus-read-only)                                                     |
 | [**2) Methods**](https://github.com/marckrenn/framer-Firebase#2-methods)                                                                                |
-| \|--- [firebase**.get**()](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)                                           |
-| \|--- [firebase**.put**()](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)                                      |
-| \|--- [firebase**.post**()](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)                                    |
-| \|--- [firebase**.patch**()](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)                                  |
-| \|--- [firebase**.delete**()](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)                                    |
-| \|--- [firebase**.onChange**()](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-or-connection-callback)                              |
+| \|--- [firebase.get()](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)                                           |
+| \|--- [firebase.put()](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)                                      |
+| \|--- [firebase.post()](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)                                    |
+| \|--- [firebase.patch()](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)                                  |
+| \|--- [firebase.delete()](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)                                    |
+| \|--- [firebase.onChange()](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-or-connection-callback)                              |
 | [**3) Parameters**](https://github.com/marckrenn/framer-Firebase#3-parameters)                                                                          |
 | \|--- [**OrderBy**- and **Limit**-parameters](https://github.com/marckrenn/framer-Firebase#-orderby--and-limit--paramters)                              |
 
@@ -162,12 +162,12 @@ Returns the current connection status, either *"connected"* or *"disconnected"*.
 
 | Method                                                                                                             | Arguments                              | Use case                       |
 | ---:                                                                                                               | :---                                   | :---                           |
-| [firebase**.get**](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)              | (path, callback, *parameters*)         | Retreives data                 |
-| [firebase**.put**](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)         | (path, data, *callback*, *parameters*) | Writes / updates data          |
-| [firebase**.post**](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)       | (path, data, *callback*, *parameters*) | Writes data using a random key |
-| [firebase**.patch**](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)     | (path, data, *callback*, *parameters*) | Updates data                   |
-| [firebase**.delete**](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)       | (path, *callback*,  *parameters*)      | Deletes data                   |
-| [firebase**.onChange**](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-or-connection-callback) | (path or "connection", callback)       | Monitors / syncs data          |
+| [firebase.get](https://github.com/marckrenn/framer-Firebase#-firebasegetpath-callback-parameters)              | (path, callback, *parameters*)         | Retreives data                 |
+| [firebase.put](https://github.com/marckrenn/framer-Firebase#-firebaseputpath-data-callback-parameters)         | (path, data, *callback*, *parameters*) | Writes / updates data          |
+| [firebase.post](https://github.com/marckrenn/framer-Firebase#-firebasepostpath-data-callback-parameters)       | (path, data, *callback*, *parameters*) | Writes data using a random key |
+| [firebase.patch](https://github.com/marckrenn/framer-Firebase#-firebasepatchpath-data-callback-parameters)     | (path, data, *callback*, *parameters*) | Updates data                   |
+| [firebase.delete](https://github.com/marckrenn/framer-Firebase#-firebasedeletepath-callback--parameters)       | (path, *callback*,  *parameters*)      | Deletes data                   |
+| [firebase.onChange](https://github.com/marckrenn/framer-Firebase#-firebaseonchangepath-or-connection-callback) | (path or "connection", callback)       | Monitors / syncs data          |
 
 > **Protip:** As a beginner, you can ignore separated *callback*-functions and *parameters*.
 
