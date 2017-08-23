@@ -3,7 +3,7 @@
     "description": "Allows to load, save and sync data effortlessly between multiple sessions and devices.",
     "author": "Marc Krenn",
 
-    "require": "{Firebase} = require 'firebase''",
+    "require": "{Firebase} = require 'firebase'",
     "install": "firebase.coffee",
     "example": "example.coffee",
 
