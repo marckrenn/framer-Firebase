@@ -26,7 +26,11 @@ These examples include access to a public demo database for the purpose of demon
 
 ## Getting started in under 5 minutes
 
-I'd also like to recommend reading [*Supercharge your Framer prototype with Firebase, pt.1*](https://medium.com/@marc_krenn/framerfirebase1-e7d13a939cf4) on Medium, if you haven't already.
+<a href='https://open.framermodules.com/Firebase'>
+    <img alt='Install with Framer Modules'
+    src='https://www.framermodules.com/assets/badge@2x.png' width='160' height='40' /></a>
+
+<strong>OR</strong>
 
 | Step    | Instruction                                                                                                                                                                                                            |
 | :---:   | :---                                                                                                                                                                                                                   |
@@ -39,6 +43,7 @@ I'd also like to recommend reading [*Supercharge your Framer prototype with Fire
 | **6**   | Back in Framer, add `firebase = new Firebase` and set the required [Class Properties](https://github.com/marckrenn/framer-Firebase#1-properties)                                                                       |
 | **7**   | Save, load and sync data using the available [Class Methods](https://github.com/marckrenn/framer-Firebase#2-methods). Also, check out the [Demo Projects](https://github.com/marckrenn/framer-Firebase#demo-projects). |
 
+I'd also like to recommend reading [*Supercharge your Framer prototype with Firebase, pt.1*](https://medium.com/@marc_krenn/framerfirebase1-e7d13a939cf4) on Medium, if you haven't already.
 
 ### Tips
 
