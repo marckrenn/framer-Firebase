@@ -61,7 +61,7 @@ class exports.Firebase extends Framer.BaseClass
 				when 2 then console.log "Firebase: Request received \n URL: '#{url}'"              if debug
 				when 3 then console.log "Firebase: Processing request \n URL: '#{url}'"            if debug
 				when 4
-					unless xhttp.responseText is null
+					if xhttp.responseText?
 						callback(JSON.parse(xhttp.responseText)) if callback? 
 						console.log "Firebase: Request finished, response: '#{JSON.parse(xhttp.responseText)}' \n URL: '#{url}'" if debug
 					else
