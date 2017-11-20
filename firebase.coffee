@@ -42,7 +42,7 @@ class exports.Firebase extends Framer.BaseClass
 				window.open(url,"_self")
 
 			url += "&orderBy=" + '"' + parameters.orderBy + '"' if typeof parameters.orderBy      is "string"
-			print url += "&limitToFirst=#{parameters.limitToFirst}"   if typeof parameters.limitToFirst is "number"
+			url += "&limitToFirst=#{parameters.limitToFirst}"   if typeof parameters.limitToFirst is "number"
 			url += "&limitToLast=#{parameters.limitToLast}"     if typeof parameters.limitToLast  is "number"
 			url += "&startAt=#{parameters.startAt}"             if typeof parameters.startAt      is "number"
 			url += "&endAt=#{parameters.endAt}"                 if typeof parameters.endAt        is "number"
@@ -61,8 +61,12 @@ class exports.Firebase extends Framer.BaseClass
 				when 2 then console.log "Firebase: Request received \n URL: '#{url}'"              if debug
 				when 3 then console.log "Firebase: Processing request \n URL: '#{url}'"            if debug
 				when 4
-					callback(JSON.parse(xhttp.responseText)) if callback?
-					console.log "Firebase: Request finished, response: '#{JSON.parse(xhttp.responseText)}' \n URL: '#{url}'" if debug
+					unless xhttp.responseText is null
+						callback(JSON.parse(xhttp.responseText)) if callback? 
+						console.log "Firebase: Request finished, response: '#{JSON.parse(xhttp.responseText)}' \n URL: '#{url}'" if debug
+					else
+						console.log "Lost connection to Firebase." if debug
+						
 
 			if xhttp.status is "404"
 				console.warn "Firebase: Invalid request, page not found \n URL: '#{url}'" if debug
