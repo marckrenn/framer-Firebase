@@ -63,20 +63,20 @@ class exports.Firebase extends Framer.BaseClass
 		return r
 
 	# Third argument can also accept options, rather than callback
-	parseArgs = (args..., cb) ->
-		if typeof args[2] is "object"
-			args[3] = args[2]
-			args[2] = null
+	parseArgs = (l, args..., cb) ->
+		if typeof args[l-1] is "object"
+			args[l] = args[l-1]
+			args[l-1] = null
 
 		return cb.apply(null, args)
 
 	# Available methods
 
-	get:    (args...) -> parseArgs args..., (path, 		 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "GET",    null, parameters, @debug)
-	put:    (args...) -> parseArgs args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PUT",    data, parameters, @debug)
-	post:   (args...) -> parseArgs args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "POST",   data, parameters, @debug)
-	patch:  (args...) -> parseArgs args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PATCH",  data, parameters, @debug)
-	delete: (args...) -> parseArgs args..., (path, 	  	 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "DELETE", null, parameters, @debug)
+	get:    (args...) -> parseArgs 2, args..., (path, 		 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "GET",    null, parameters, @debug)
+	put:    (args...) -> parseArgs 3, args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PUT",    data, parameters, @debug)
+	post:   (args...) -> parseArgs 3, args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "POST",   data, parameters, @debug)
+	patch:  (args...) -> parseArgs 3, args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PATCH",  data, parameters, @debug)
+	delete: (args...) -> parseArgs 2, args..., (path, 	  	 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "DELETE", null, parameters, @debug)
 
 
 	onChange: (path, callback) ->
