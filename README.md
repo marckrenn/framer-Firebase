@@ -3,6 +3,8 @@
 # framer-Firebase
 
 The **Firebase module** allows your Framer prototype to **load**, **save** and **sync** data effortlessly between multiple sessions and devices.
+
+Updated to support Promises.
 <br />
 
 ## Demo Projects
