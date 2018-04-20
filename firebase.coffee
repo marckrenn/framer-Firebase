@@ -1,5 +1,3 @@
-
-
 # Documentation of this Module: https://github.com/marckrenn/framer-Firebase
 # ------ : ------- Firebase REST API: https://firebase.google.com/docs/reference/rest/database/
 
@@ -23,11 +21,9 @@ class exports.Firebase extends Framer.BaseClass
 		console.log "Firebase: Connecting to Firebase Project '#{@projectID}' ... \n URL: 'https://#{@projectID}.firebaseio.com'" if @debug
 		@.onChange "connection"
 
-
 	request = (project, secret, path, callback, method, data, parameters, debug) ->
 
 		url = "https://#{project}.firebaseio.com#{path}.json#{secret}"
-
 
 		if parameters?
 			if parameters.shallow            then url += "&shallow=true"
@@ -66,14 +62,21 @@ class exports.Firebase extends Framer.BaseClass
 		
 		return r
 
+	# Third argument can also accept options, rather than callback
+	parseArgs = (args..., cb) ->
+		if typeof args[2] is "object"
+			args[3] = args[2]
+			args[2] = null
+
+		return cb.apply(null, args)
 
 	# Available methods
 
-	get:    (path, callback,       parameters) -> request(@projectID, @secretEndPoint, path, callback, "GET",    null, parameters, @debug)
-	put:    (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "PUT",    data, parameters, @debug)
-	post:   (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "POST",   data, parameters, @debug)
-	patch:  (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "PATCH",  data, parameters, @debug)
-	delete: (path, callback,       parameters) -> request(@projectID, @secretEndPoint, path, callback, "DELETE", null, parameters, @debug)
+	get:    (args...) -> parseArgs args..., (path, 		 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "GET",    null, parameters, @debug)
+	put:    (args...) -> parseArgs args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PUT",    data, parameters, @debug)
+	post:   (args...) -> parseArgs args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "POST",   data, parameters, @debug)
+	patch:  (args...) -> parseArgs args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PATCH",  data, parameters, @debug)
+	delete: (args...) -> parseArgs args..., (path, 	  	 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "DELETE", null, parameters, @debug)
 
 
 	onChange: (path, callback) ->

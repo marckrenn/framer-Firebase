@@ -198,8 +198,18 @@ Retrieves data from the database.
 firebase.get "/value", (value) ->
 	print value
 
+# Promise
+firebase.get "/value"
+.then (value) -> print value
+
 # Simple 2, expecting dataset
 firebase.get "/names", (names) ->
+	namesArray = _.toArray(names) # converts JSON to array
+	print name for name in namesArray
+
+# Promise
+firebase.get "/names"
+.then (names) ->
 	namesArray = _.toArray(names) # converts JSON to array
 	print name for name in namesArray
 
@@ -209,6 +219,10 @@ response = (names) ->
 	print name for name in namesArray
 
 firebase.get("/names",response,{orderBy: "$key", limitToFirst: 5})
+
+# Promise
+firebase.get("/names",{orderBy: "$key", limitToFirst: 5})
+.then(response)
 
 ```
 <br />
@@ -236,6 +250,9 @@ response = (confirmation) ->
 
 firebase.put("/values", {"foo": true, "bar": false}, response)
 
+# Promise
+firebase.put("/values", {"foo": true, "bar": false})
+.then(response)
 ```
 <br />
 
