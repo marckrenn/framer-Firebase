@@ -3,6 +3,8 @@
 # framer-Firebase
 
 The **Firebase module** allows your Framer prototype to **load**, **save** and **sync** data effortlessly between multiple sessions and devices.
+
+Updated to support Promises.
 <br />
 
 ## Demo Projects
@@ -27,8 +29,8 @@ These examples include access to a public demo database for the purpose of demon
 ## Getting started in under 5 minutes
 
 <a href='https://open.framermodules.com/Firebase'>
-    <img alt='Install with Framer Modules'
-    src='https://www.framermodules.com/assets/badge@2x.png' width='160' height='40' /></a>
+  <img alt='Install with Framer Modules'
+  src='https://www.framermodules.com/assets/badge@2x.png' width='160' height='40' /></a>
 
 <strong>OR</strong>
 
@@ -108,8 +110,8 @@ The required information is located at https://firebase.google.com → *Console*
 
 ```coffee
 firebase = new Firebase
-	projectID: ___________ # 1) ... Database → first part of URL
-	secret: ______________ # 2) ... Project Settings → Service Accounts → Database Secrets → Show (mouse-over)
+  projectID: ___________ # 1) ... Database → first part of URL
+  secret: ______________ # 2) ... Project Settings → Service Accounts → Database Secrets → Show (mouse-over)
 ```
   
 
@@ -134,8 +136,8 @@ If you wish not to use and share your database *secret* in your Framer project l
 ```json
 {
   "rules": {
-    ".read": "true",
-    ".write": "true"
+  ".read": "true",
+  ".write": "true"
   }
 }
 ```
@@ -196,19 +198,33 @@ Retrieves data from the database.
 ```coffee
 # Simple 1, expecting single value
 firebase.get "/value", (value) ->
-	print value
+  print value
+
+# Promise
+firebase.get "/value"
+.then (value) -> print value
 
 # Simple 2, expecting dataset
 firebase.get "/names", (names) ->
-	namesArray = _.toArray(names) # converts JSON to array
-	print name for name in namesArray
+  namesArray = _.toArray(names) # converts JSON to array
+  print name for name in namesArray
+
+# Promise
+firebase.get "/names"
+.then (names) ->
+  namesArray = _.toArray(names) # converts JSON to array
+  print name for name in namesArray
 
 # Advanced
 response = (names) ->
-	namesArray = _.toArray(names)
-	print name for name in namesArray
+  namesArray = _.toArray(names)
+  print name for name in namesArray
 
 firebase.get("/names",response,{orderBy: "$key", limitToFirst: 5})
+
+# Promise
+firebase.get("/names",{orderBy: "$key", limitToFirst: 5})
+.then(response)
 
 ```
 <br />
@@ -232,10 +248,13 @@ firebase.put("/value", true)
 
 # Advanced
 response = (confirmation) ->
-	print confirmation
+  print confirmation
 
 firebase.put("/values", {"foo": true, "bar": false}, response)
 
+# Promise
+firebase.put("/values", {"foo": true, "bar": false})
+.then(response)
 ```
 <br />
 
@@ -258,19 +277,19 @@ firebase.post("/value", true)
 
 # Advanced
 firebase.post("/addressBook", { # JSON encoded:
-							"name" : 	{
-										"forename" : "Jane",
-										"surename" : "Doe"
-										}
+  "name" :  {
+      "forename" : "Jane",
+      "surename" : "Doe"
+      }
 
-							"birthday" : 	{
-											"day"  : 4,
-											"month": 7,
-											"year" : 1976
-											}
+  "birthday" :  {
+     "day"  : 4,
+     "month": 7,
+     "year" : 1976
+     }
 
-							"tel" : "202-555-0101"
-							})
+  "tel" : "202-555-0101"
+  })
 
 ```
 <br />
@@ -313,14 +332,14 @@ Fires, when the Framer project is loaded (returns all current data of the path) 
 
 # Simple
 firebase.onChange "/values", (value) ->
-	print value
+  print value
 
 # Advanced
 response = (data, method, path, breadcrumbs) ->
-	# method returns either `put´ or `patch´, depending on what method changed the data
-	# path returns the path that was changed
-	# breadcrumbs returns the path as segments (array)
-	print "received #{data} via #{method}"
+  # method returns either `put´ or `patch´, depending on what method changed the data
+  # path returns the path that was changed
+  # breadcrumbs returns the path as segments (array)
+  print "received #{data} via #{method}"
 
 firebase.onChange("/values", response)
 
@@ -336,8 +355,8 @@ Fires, whenever the connection status to Firebase has changed.
 ```coffee
 
 firebase.onChange "connection", (status) ->
-	# status is either `connected´ or `disconnected´
-	print "Hooray, we're connected to Firebase" if status is "connected"
+  # status is either `connected´ or `disconnected´
+  print "Hooray, we're connected to Firebase" if status is "connected"
 
 # Or
 
@@ -376,11 +395,11 @@ For further information on how to order or limit requests please refer to [Fireb
 ```JSON
 
 {
-	"rules": 	{
-				".read": "auth != null",
-				".write": "auth != null",
-				"routes": {".indexOn": ["distance"]}
-				}
+  "rules":  {
+   ".read": "auth != null",
+   ".write": "auth != null",
+   "routes": {".indexOn": ["distance"]}
+   }
 }
 
 ```

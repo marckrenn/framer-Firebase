@@ -1,5 +1,3 @@
-
-
 # Documentation of this Module: https://github.com/marckrenn/framer-Firebase
 # ------ : ------- Firebase REST API: https://firebase.google.com/docs/reference/rest/database/
 
@@ -23,13 +21,11 @@ class exports.Firebase extends Framer.BaseClass
 		console.log "Firebase: Connecting to Firebase Project '#{@projectID}' ... \n URL: 'https://#{@projectID}.firebaseio.com'" if @debug
 		@.onChange "connection"
 
-
 	request = (project, secret, path, callback, method, data, parameters, debug) ->
 
 		url = "https://#{project}.firebaseio.com#{path}.json#{secret}"
 
-
-		unless parameters is undefined
+		if parameters?
 			if parameters.shallow            then url += "&shallow=true"
 			if parameters.format is "export" then url += "&format=export"
 
@@ -47,45 +43,40 @@ class exports.Firebase extends Framer.BaseClass
 			url += "&startAt=#{parameters.startAt}"             if typeof parameters.startAt      is "number"
 			url += "&endAt=#{parameters.endAt}"                 if typeof parameters.endAt        is "number"
 			url += "&equalTo=#{parameters.equalTo}"             if typeof parameters.equalTo      is "number"
-
-		xhttp = new XMLHttpRequest
+		
 		console.log "Firebase: New '#{method}'-request with data: '#{JSON.stringify(data)}' \n URL: '#{url}'" if debug
-		xhttp.onreadystatechange = =>
+		
+		options = if data?
+			body: JSON.stringify(data)
+			method: method
+			headers:
+				'content-type': 'application/json; charset=utf-8'
+		
+		r = fetch url, (options ? {})
+		.then (res) ->
+			if !res.ok then throw Error(res.statusText)
+			json = res.json()
+			json.then callback
+			return json
+		.catch (error) => console.warn(error)
+		
+		return r
 
-			unless parameters is undefined
-				if parameters.print is "silent" or typeof parameters.download is "string" then return # ugh
+	# Third argument can also accept options, rather than callback
+	parseArgs = (l, args..., cb) ->
+		if typeof args[l-1] is "object"
+			args[l] = args[l-1]
+			args[l-1] = null
 
-			switch xhttp.readyState
-				when 0 then console.log "Firebase: Request not initialized \n URL: '#{url}'"       if debug
-				when 1 then console.log "Firebase: Server connection established \n URL: '#{url}'" if debug
-				when 2 then console.log "Firebase: Request received \n URL: '#{url}'"              if debug
-				when 3 then console.log "Firebase: Processing request \n URL: '#{url}'"            if debug
-				when 4
-					if xhttp.responseText?
-						callback(JSON.parse(xhttp.responseText)) if callback? 
-						console.log "Firebase: Request finished, response: '#{JSON.parse(xhttp.responseText)}' \n URL: '#{url}'" if debug
-					else
-						console.log "Lost connection to Firebase." if debug
-						
-
-			if xhttp.status is "404"
-				console.warn "Firebase: Invalid request, page not found \n URL: '#{url}'" if debug
-
-
-		xhttp.open(method, url, true)
-		xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8")
-		xhttp.send(data = "#{JSON.stringify(data)}")
-
-
+		return cb.apply(null, args)
 
 	# Available methods
 
-	get:    (path, callback,       parameters) -> request(@projectID, @secretEndPoint, path, callback, "GET",    null, parameters, @debug)
-	put:    (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "PUT",    data, parameters, @debug)
-	post:   (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "POST",   data, parameters, @debug)
-	patch:  (path, data, callback, parameters) -> request(@projectID, @secretEndPoint, path, callback, "PATCH",  data, parameters, @debug)
-	delete: (path, callback,       parameters) -> request(@projectID, @secretEndPoint, path, callback, "DELETE", null, parameters, @debug)
-
+	get:    (args...) -> parseArgs 2, args..., (path, 		 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "GET",    null, parameters, @debug)
+	put:    (args...) -> parseArgs 3, args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PUT",    data, parameters, @debug)
+	post:   (args...) -> parseArgs 3, args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "POST",   data, parameters, @debug)
+	patch:  (args...) -> parseArgs 3, args..., (path, data, callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "PATCH",  data, parameters, @debug)
+	delete: (args...) -> parseArgs 2, args..., (path, 	  	 callback, parameters) => request(@projectID, @secretEndPoint, path, callback, "DELETE", null, parameters, @debug)
 
 
 	onChange: (path, callback) ->
@@ -111,17 +102,16 @@ class exports.Firebase extends Framer.BaseClass
 					console.warn "Firebase: Connection to Firebase Project '#{@projectID}' closed" if @debug
 				currentStatus = "disconnected"
 
+			return
 
-		else
+		url = "https://#{@projectID}.firebaseio.com#{path}.json#{@secretEndPoint}"
+		source = new EventSource(url)
+		console.log "Firebase: Listening to changes made to '#{path}' \n URL: '#{url}'" if @debug
 
-			url = "https://#{@projectID}.firebaseio.com#{path}.json#{@secretEndPoint}"
-			source = new EventSource(url)
-			console.log "Firebase: Listening to changes made to '#{path}' \n URL: '#{url}'" if @debug
+		source.addEventListener "put", (ev) =>
+			callback(JSON.parse(ev.data).data, "put", JSON.parse(ev.data).path, _.tail(JSON.parse(ev.data).path.split("/"),1)) if callback?
+			console.log "Firebase: Received changes made to '#{path}' via 'PUT': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
 
-			source.addEventListener "put", (ev) =>
-				callback(JSON.parse(ev.data).data, "put", JSON.parse(ev.data).path, _.tail(JSON.parse(ev.data).path.split("/"),1)) if callback?
-				console.log "Firebase: Received changes made to '#{path}' via 'PUT': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
-
-			source.addEventListener "patch", (ev) =>
-				callback(JSON.parse(ev.data).data, "patch", JSON.parse(ev.data).path, _.tail(JSON.parse(ev.data).path.split("/"),1)) if callback?
-				console.log "Firebase: Received changes made to '#{path}' via 'PATCH': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
+		source.addEventListener "patch", (ev) =>
+			callback(JSON.parse(ev.data).data, "patch", JSON.parse(ev.data).path, _.tail(JSON.parse(ev.data).path.split("/"),1)) if callback?
+			console.log "Firebase: Received changes made to '#{path}' via 'PATCH': #{JSON.parse(ev.data).data} \n URL: '#{url}'" if @debug
