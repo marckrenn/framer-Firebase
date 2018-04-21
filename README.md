@@ -13,13 +13,13 @@ Updated to support Promises.
 | :---:                                                            | :---:                                                             |
 | ![gif](http://i.giphy.com/l0K40AVo2PF0usMuY.gif)                 | ![gif](http://i.giphy.com/3o7qE5fsbV3QqzyOZi.gif)                 |
 | Loads, saves and syncs *slider.value* w/ 2 lines of code         | World's first(?) bubble popping MMO                               |
-| Live @ [firebaseSlider](https://framer.cloud/ljPWN/)             | Live @ [firebaseBubbles](https://framer.cloud/Pfkqn)              |
+| Live @ [firebaseSlider](https://framer.cloud/mRRkp/)             | Live @ [firebaseBubbles](https://framer.cloud/hCHjX/)             |
 
 | Placeholder                                                      | Advanced                                                          |
 | :---:                                                            | :---:                                                             |
 | ![png](http://i.imgur.com/DJt6U3a.png)                           | ![gif](http://i.giphy.com/l0K4lktvDV129Jl8k.gif)                  |
 |                                                                  | *Like*-counts, three of them                                      |
-|                                                                  | Live @ [firebaseLikes](https://framer.cloud/vrEdo)                |
+|                                                                  | Live @ [firebaseLikes](https://framer.cloud/IdelR/)               |
 
 These examples include access to a public demo database for the purpose of demonstration.
 > **Please DON'T use this demo database for your projects! Your data will be deleted.**
@@ -113,7 +113,7 @@ firebase = new Firebase
   projectID: ___________ # 1) ... Database → first part of URL
   secret: ______________ # 2) ... Project Settings → Service Accounts → Database Secrets → Show (mouse-over)
 ```
-  
+
 
 | 1) projectID                                                 | 2) secret                                                     |
 | :---:                                                        | :---:                                                         |
@@ -416,4 +416,3 @@ For further information on how to order or limit requests please refer to [Fireb
 | startAt:      | *Number*   |
 | endAt:        | *Number*   |
 | equalTo:      | *Number*   |
-
