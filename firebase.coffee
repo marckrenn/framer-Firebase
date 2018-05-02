@@ -46,13 +46,15 @@ class exports.Firebase extends Framer.BaseClass
 		
 		console.log "Firebase: New '#{method}'-request with data: '#{JSON.stringify(data)}' \n URL: '#{url}'" if debug
 		
-		options = if data?
-			body: JSON.stringify(data)
+		options =
 			method: method
 			headers:
 				'content-type': 'application/json; charset=utf-8'
 		
-		r = fetch url, (options ? {})
+		if data?
+			options.body = JSON.stringify(data)
+
+		r = fetch(url, options)
 		.then (res) ->
 			if !res.ok then throw Error(res.statusText)
 			json = res.json()
